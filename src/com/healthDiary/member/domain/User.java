@@ -1,4 +1,4 @@
-package com.healthDiary.user.domain;
+package com.healthDiary.member.domain;
 
 import java.util.Date;
 

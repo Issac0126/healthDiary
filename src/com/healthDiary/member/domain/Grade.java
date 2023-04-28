@@ -1,4 +1,4 @@
-package com.healthDiary.user.domain;
+package com.healthDiary.member.domain;
 
 public enum Grade {
 
