@@ -1,9 +1,4 @@
 package com.java.exercise.repository;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.java.exercise.domain.Exercise;
-import com.java.main.HealthManage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,8 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.java.common.DataBaseConnection;
+import com.java.exercise.domain.Exercise;
+import com.java.main.HealthManage;
+//import com.java.exercise.repository.*;
+//import com.java.main.HealthManage;
+//import com.java.exercise.domain.service.ExerciseService;
+//import java.util.ArrayList;
+//import java.util.List;
 public class ExerciseRepository {
 
+	private DataBaseConnection	connection = DataBaseConnection.getInstance();
 	/*
  	CREATE TABLE member (
     member_number	NUMBER(10) PRIMARY KEY NOT NULL,
@@ -71,37 +76,78 @@ VALUES (exercise_seq.NEXTVAL, '러닝머신', 'S');
 DELETE FROM exercise
 WHERE exe_num = 1;*/
 
-	public void showAllExercise(Exercise Exercise) {
+	public void addExercise(Exercise newExercise) {
+		String sql = "INSERT INTO exercise "
+				+ "(exe_num, exe_name) "
+				//, exe_measure
+				+ "VALUES(exercise_seq.NEXTVAL,?)";
+		try (Connection conn = connection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			//			pstmt.setInt(1, newExercise.getExe_num());
+			pstmt.setString(1, newExercise.getExe_name());
+			if(pstmt.executeUpdate() == 1) {
+				System.out.printf("\n%s 운동을 등록했습니다!", newExercise.getExe_name());
+			} else {
+				System.out.println("\n%s 운동 등록에 실패했습니다ㅠㅠ");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		////	private DataBaseConnection connection = DataBaseConnection.getInstance();
-		//		이건 sql 데이터 연결시키고 해야지
+	}
 
-//		String sql = "INSERT INTO newExercise "
-//				+ "(exercise_name) VALUES(exercise_seq,?)";
 
-		//		CREATE SEQUENCE exercise_seq
-//		public List<Exercise> searchByExercise(String exercise) {
-//			List<Exercise> exerciseList = new ArrayList<>();
-//			String sql = "";
-//			if(exercise.equals("true")) {
-//				sql = "SELECT * FROM exercise WHERE exercise = 'true'";
-//			}
-//			try (Connection conn = getConnection();
-//					PreparedStatement pstmt = conn.prepareStatement(sql);
-//					ResultSet rs = pstmt.executeQuery()) {
-//
-//				while (rs.next()) {
-//					int exerciseNum = rs.getInt("exe_num");
-//					String exerciseName = rs.getString("exe_name");
-//					String exerciseMeasure = rs.getString("exe_measure");
-//					exerciseList.add(new Exercise(exerciseNum, exerciseName, exerciseMeasure));
-//				}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//			return exerciseList;
-//		}
-//	}
-}
+	public void showAllExercise() {
+
+		//		try (Connection conn = connection.getConnection();
+		//				PreparedStatement pstmt = conn.prepareStatement(
+		//						"INSERT INTO newExercise (exe_name) VALUES(?)")){
+		//			pstmt.setString(1, exercise.getExe_name());
+		//			pstmt.executeUpdate();
+		//		} catch (SQLException e) {
+		//			e.printStackTrace();
+		//		}
+		//		
+	}	
+	//	private DataBaseConnection connection = DataBaseConnection.getInstance();
+	//		이건 sql 데이터 연결시키고 해야지
+
+	//		String sql = "INSERT INTO newExercise "
+	//				+ "(exe_name) VALUES(exercise_seq.NEXTVAL,?)";
+
+
+ 	//CREATE SEQUENCE exercise_seq
+	public List<Exercise> searchByExercise(String exercise) {
+		List<Exercise> exerciseList = new ArrayList<>();
+		String sql = "";
+		if(exercise.equals("true")) {
+			sql = "SELECT * FROM exercise WHERE exercise = 'true'";
+		}
+		try (Connection conn = connection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+
+			while (rs.next()) {
+				Exercise exercise1 = new Exercise(
+						//////////
+						rs.getInt("exe_num"),
+						rs.getString("exe_name"),
+						rs.getString("exe_measure")
+						);
+				//					int exerciseNum = rs.getInt("exe_num");
+				//					String exerciseName = rs.getString("exe_name");
+				//					String exerciseMeasure = rs.getString("exe_measure");
+				//					exerciseList.add(new Exercise(exerciseNum, exerciseName, exerciseMeasure));
+				exerciseList.add(exercise1);
+				///////////
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return exerciseList;
+	}
+
+
+
 
 }

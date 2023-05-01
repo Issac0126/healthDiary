@@ -3,7 +3,7 @@ import static com.java.view.AppUI.inputInteger;
 import static com.java.view.AppUI.inputString;
 
 import com.java.common.AppService;
-public class memberService implements AppService {
+public class MemberService implements AppService {
 
 	@Override
 	public void start() {

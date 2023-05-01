@@ -3,6 +3,7 @@ package com.java.common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import com.java.exercise.repository.ExerciseRepository;
 
 public class DataBaseConnection {
 
