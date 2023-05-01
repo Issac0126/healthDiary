@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.java.common.DataBaseConnection;
 import com.java.exercise.domain.Exercise;
-import com.java.main.HealthManage;
 //import com.java.exercise.repository.*;
 //import com.java.main.HealthManage;
 //import com.java.exercise.domain.service.ExerciseService;
@@ -85,6 +84,7 @@ WHERE exe_num = 1;*/
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			//			pstmt.setInt(1, newExercise.getExe_num());
 			pstmt.setString(1, newExercise.getExe_name());
+//			pstmt.setString(2, newExercise.getExe_measure());
 			if(pstmt.executeUpdate() == 1) {
 				System.out.printf("\n%s 운동을 등록했습니다!", newExercise.getExe_name());
 			} else {

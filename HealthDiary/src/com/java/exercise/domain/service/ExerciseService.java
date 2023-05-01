@@ -9,7 +9,6 @@ import java.util.List;
 import com.java.common.AppService;
 import com.java.exercise.domain.Exercise;
 import com.java.exercise.repository.ExerciseRepository;
-import com.java.member.domain.Member;
 import com.java.member.repository.MemberRepository;
 
 public class ExerciseService implements AppService{
@@ -28,7 +27,8 @@ public class ExerciseService implements AppService{
 				insertExercise();
 				break;
 			case 2:
-				showAllExercise();
+//				showAllExercise();
+				searchExerciseData();
 				break;
 			case 3:
 				deleteExercise();
@@ -45,27 +45,7 @@ public class ExerciseService implements AppService{
 
 
 	//1. 운동 추가
-	private void insertExercise() {
-		System.out.println("어떤 운동 새로 하실래요?? 말씀해주세요!");
-		System.out.print(">>> ");
-		String newExe = inputString();
-
-		Exercise newExercise = new Exercise();
-		newExercise.setExe_name(newExe);
-		ExerciseRepository repository = new ExerciseRepository();
-		System.out.println(newExe + " 운동 지금 하실래요?(Y/N)");
-		System.out.print(">>> ");
-		String exeRn = inputString();
-		if(exeRn.toUpperCase().equals("Y")) {
-			exerciseProcess(0);
-		} else if(exeRn.toUpperCase().equals("N")){
-			System.out.println("알겠습니다. 목록에만 추가하도록 하겠습니다.");
-			repository.addExercise(newExercise);   //추가
-		} else {
-			System.out.println("다시 입력해주세요.");
-			return;
-		}
-	}
+	private void insertExercise() {}
 
 
 
@@ -134,18 +114,19 @@ public class ExerciseService implements AppService{
 			return;
 		}
 
-
 	}
 
 
 
 	//운동 수행하기
 	private void exerciseProcess(int exe_num) {
-		System.out.println("성함을 알려주세요.");
-		System.out.print(">>>");
-		String name = inputString();
+		System.out.println("여기까진 왔다!");
+		
+//		System.out.println("성함을 알려주세요.");
+//		System.out.print(">>>");
+//		String name = inputString();
 
-		List<Member> members = memberRepository.findByMemberName(name);
+//		List<Member> members = memberRepository.findByMemberName(name);
 	}
 
 
