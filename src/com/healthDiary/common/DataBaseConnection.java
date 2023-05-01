@@ -22,7 +22,6 @@ public class DataBaseConnection {
 	}
 	
 	public Connection getConnection() throws SQLException {
-		
 		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
 	}
 	
