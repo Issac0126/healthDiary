@@ -5,7 +5,11 @@ searchExerciseData() 출력 안됨
 되긴 한다
 
 SQL과 연결이 이상한 듯 하다.
-2-1-1 후에 갑자기 운동 지금 하실래요?로 나온다
+
+
+2-1-1 후
+목록이 없다고 나온다.
+
 
 2-1-2 후 목록추가 멘트까진 나온다
 아무래도 SQL 연결이 불안정하다보니 나오는 문제가 아닐까
@@ -17,8 +21,16 @@ ORA-01400: cannot insert NULL into ("HR"."EXERCISE"."EXE_NAME")
 private void insertExercise() {
 이 메서드로 돌아가는 방법은 없을까 초기 화면 말고
 
-2-3
+
+2-2 	searchExerciseData
+안나온다 sql연결때문??
+
+
+2-3	deleteExercise
 그냥 초기 화면으로 돌아가버린다
 
 
 
+exe_measure를 초기값 null 인데 sql문에서 어떻게 해야될지
+
+운동 수행 후에 exe_measure에 어떻게 값을 넣지

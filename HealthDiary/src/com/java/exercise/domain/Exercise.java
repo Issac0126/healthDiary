@@ -38,6 +38,17 @@ public class Exercise {
 		this.exe_measure = exe_measure;
 	}
 
+	////////////////////////////////////////////////
+	public void setName(String answer) {
+	    this.exe_name = answer;
+	}
+	////////////////////////////////////////////////
+
+	public boolean contains(String select) {
+		return exe_name.equals(select);
+	}
+
+	
 //	@Override
 //	public String toString() {
 //		

@@ -1,8 +1,8 @@
 package com.java.main;
 
 import com.java.common.AppService;
-import com.java.member.MemberService;
 import com.java.exercise.domain.service.ExerciseService;
+import com.java.member.service.MemberService;
 
 public class AppController {
 

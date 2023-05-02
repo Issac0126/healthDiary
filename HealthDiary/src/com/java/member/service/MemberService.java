@@ -1,4 +1,4 @@
-package com.java.member;
+package com.java.member.service;
 import static com.java.view.AppUI.inputInteger;
 import static com.java.view.AppUI.inputString;
 

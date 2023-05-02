@@ -52,6 +52,7 @@ public class ExerciseService implements AppService{
 	//2. 운동 조회
 		private List<Exercise> searchExerciseData() {
 			System.out.println("운동 목록 보여드릴게요.");
+			//운동 목록 조회			
 			return null;
 			
 		}
@@ -100,9 +101,9 @@ public class ExerciseService implements AppService{
 		if(exerciseList.contains(delExe)){
 			System.out.println("정말 삭제할까요?(Y/N)");
 			String delAnswer = inputString();
-			if(delAnswer.equals('Y')) {
+			if(delAnswer.equals("Y")) {
 				exerciseList.remove(delExe);
-			} else if(delAnswer.equals('N')){
+			} else if(delAnswer.equals("N")){
 				System.out.println("그럼 다시 한 번 생각해봐야겠네요.");
 				return;
 			} else {
@@ -119,14 +120,16 @@ public class ExerciseService implements AppService{
 
 
 	//운동 수행하기
-	private void exerciseProcess(int exe_num) {
-		System.out.println("여기까진 왔다!");
+	public void exerciseProcess(int exe_num) {
+		System.out.println("운동을 시작합니다!");
+		System.out.println("시간 잴게요!");
 		
-//		System.out.println("성함을 알려주세요.");
-//		System.out.print(">>>");
-//		String name = inputString();
+		long beforeTime = System.currentTimeMillis(); //시작
+        		        
+		long afterTime = System.currentTimeMillis(); // 끝
+		long secDiffTime = (afterTime - beforeTime)/1000;
+		System.out.println("수행시간: " + secDiffTime + "초");
 
-//		List<Member> members = memberRepository.findByMemberName(name);
 	}
 
 

@@ -75,24 +75,25 @@ VALUES (exercise_seq.NEXTVAL, '러닝머신', 'S');
 DELETE FROM exercise
 WHERE exe_num = 1;*/
 
-	public void addExercise(Exercise newExercise) {
+	public int addExercise(Exercise newExercise) {
+		//void??
 		String sql = "INSERT INTO exercise "
-				+ "(exe_num, exe_name) "
-				//, exe_measure
-				+ "VALUES(exercise_seq.NEXTVAL,?)";
+				+ "(exe_num, exe_name , exe_measure) "
+				+ "VALUES(exercise_seq.NEXTVAL,?,?)";
 		try (Connection conn = connection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			//			pstmt.setInt(1, newExercise.getExe_num());
 			pstmt.setString(1, newExercise.getExe_name());
-//			pstmt.setString(2, newExercise.getExe_measure());
+			pstmt.setString(2, newExercise.getExe_measure());
 			if(pstmt.executeUpdate() == 1) {
-				System.out.printf("\n%s 운동을 등록했습니다!", newExercise.getExe_name());
+				System.out.printf("\n%s운동을 등록했습니다!", newExercise.getExe_name());
+				//여기까진 성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			} else {
-				System.out.println("\n%s 운동 등록에 실패했습니다ㅠㅠ");
+				System.out.printf("\n%s운동 등록에 실패했습니다ㅠㅠ", newExercise.getExe_name());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return 0;
 
 	}
 
@@ -109,36 +110,28 @@ WHERE exe_num = 1;*/
 		//		}
 		//		
 	}	
-	//	private DataBaseConnection connection = DataBaseConnection.getInstance();
-	//		이건 sql 데이터 연결시키고 해야지
 
-	//		String sql = "INSERT INTO newExercise "
-	//				+ "(exe_name) VALUES(exercise_seq.NEXTVAL,?)";
-
-
- 	//CREATE SEQUENCE exercise_seq
-	public List<Exercise> searchByExercise(String exercise) {
+	//운동 목록 조회
+	public List<Exercise> searchByExercise(String exe_name) {
 		List<Exercise> exerciseList = new ArrayList<>();
-		String sql = "";
-		if(exercise.equals("true")) {
-			sql = "SELECT * FROM exercise WHERE exercise = 'true'";
-		}
+		String sql = "SELECT exe_name FROM exercise";
+//		if(exe_name.equals("true")) {
+//			sql = "SELECT * FROM exercise WHERE exercise = 'true'";
+//		}
 		try (Connection conn = connection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				ResultSet rs = pstmt.executeQuery()) {
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, exe_name);	
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				Exercise exercise1 = new Exercise(
+				Exercise newExercise = new Exercise(
 						//////////
 						rs.getInt("exe_num"),
 						rs.getString("exe_name"),
 						rs.getString("exe_measure")
 						);
-				//					int exerciseNum = rs.getInt("exe_num");
-				//					String exerciseName = rs.getString("exe_name");
-				//					String exerciseMeasure = rs.getString("exe_measure");
-				//					exerciseList.add(new Exercise(exerciseNum, exerciseName, exerciseMeasure));
-				exerciseList.add(exercise1);
+
+				exerciseList.add(newExercise);
 				///////////
 			}
 		} catch (SQLException e) {
@@ -147,6 +140,15 @@ WHERE exe_num = 1;*/
 		return exerciseList;
 	}
 
+
+	public Object getExercise(int exe_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private List<Exercise>exercise;
+	
+	public void deleteExercise(String select) {}
 
 
 

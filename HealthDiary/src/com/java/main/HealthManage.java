@@ -4,23 +4,24 @@ import static com.java.view.AppUI.exerciseManagementScreen;
 import static com.java.view.AppUI.inputInteger;
 import static com.java.view.AppUI.inputString;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import com.java.common.AppService;
+import com.java.common.DataBaseConnection;
 import com.java.exercise.domain.Exercise;
 import com.java.exercise.repository.ExerciseRepository;
+
 
 public class HealthManage implements AppService {
 
 	private ExerciseRepository exerciseRepository = new ExerciseRepository();
-	//	private Exercise exercise;
-	//	public HealthManage(String name) {
-	//		exercise = new Exercise(name);
-	//	}
-
+	private DataBaseConnection	connection = DataBaseConnection.getInstance();
 	Exercise exercise = new Exercise();
-	//	HealthManage healthManage = new HealthManage();
-	//	healthManage.showAllExercise();
 
 	@Override
 	public void start() {
@@ -32,46 +33,107 @@ public class HealthManage implements AppService {
 			insertExercise();
 			break;
 		case 2:  //운동 목록 조회
-			showSearchResult();
+			searchExerciseData();
 			//			ExerciseRepository.showAllExercise();
 			break;
 		case 3:  //운동 삭제
-			//			deleteExercise();
+			delExercise();
 			break;
 		default:
 			System.out.println("다시 말씀해주세요~");
 		}
 	}
-
-	private int showSearchResult() {
-		List<Exercise> exercises = showAllExercise();
-
-		if(exercises.size() > 0) {
-			System.out.println("\n운동 목록 조회 결과");
-			for(Exercise exercise: exercises) {
-				System.out.println(exercise);
-			}
-		} else {
-			System.out.println("\n조회된 운동이 없습니다.");
+	private void searchExerciseData() {
+		String sql = "SELECT exe_name FROM exercise";
+		try (Connection conn = connection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			ResultSet rs = pstmt.executeQuery();
+			int count = 0;
+			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+			System.out.println("\n운동 목록 보여드릴게요");
+			System.out.println();
+			while (rs.next()) {
+				String exeName = rs.getString("exe_name");
+				System.out.println(exeName);
+				count++;
+			}    
+			System.out.printf("===========총 %d건===========\n", count);
+		}catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return exercises.size();
+
+		System.out.println("이중에 하고싶은 운동 있으시면 알려주세요! 없다면 0을 입력해주세요.");
+		System.out.print(">>> ");
+		String workOut = inputString();
+
+		if(workOut.equals("0")) {
+			System.out.println("----------------PRESS ENTER KEY----------------");
+			return;
+		}
+
+		try (Connection conn = connection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(
+						"SELECT * FROM exercise WHERE exe_name = ?")) {
+			pstmt.setString(1, workOut);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				System.out.println("운동 시작!");
+				/////운동 수행 메서드////
+
+			} else {
+				System.out.println("존재하지 않는 운동이에요.");
+				return;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
-
+	
+	
 	private List<Exercise> showAllExercise() {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.emptyList();
 	}
 
-	//	private void delExercise() {
-	//		if() {
-	//			System.out.println("\n어떤 운동을 그만하고싶으세요?");
-	//			System.out.print(">>> ");
-	//			String selection = inputString();
-	//			System.out.println("★★★★★★★★ press Enter ★★★★★★★★4");
-	//			
-	//		}
-	//	}
+	
+	
+	private void delExercise() {
+		String sql = "SELECT exe_name FROM exercise";
+		try (Connection conn = connection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			ResultSet rs = pstmt.executeQuery();
+			int count = 0;
+			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+			System.out.println("\n어떤 운동을 그만하고싶으세요?");
+			System.out.println();
+			while (rs.next()) {
+				String exeName = rs.getString("exe_name");
+				System.out.println(exeName);
+				count++;
+			}    
+			System.out.printf("총 %d건", count);
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.print(">>> ");
+		String select = inputString();
+
+		sql = "DELETE FROM exercise WHERE exe_name = ?";
+		try (Connection conn = connection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, select);
+			int a = pstmt.executeUpdate();
+			if(a > 0) {
+				System.out.println("그래요. 이 운동은 다음부터 하지 말아요.");
+			} else {
+				System.out.println("그런 운동은 없어요 회원님!");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	private void insertExercise() {
 		while (true) {
@@ -80,13 +142,10 @@ public class HealthManage implements AppService {
 			System.out.println("2. 제가 하고싶은 운동은요~");
 			System.out.print(">>> ");
 			int selection = inputInteger();
-			System.out.println("★★★★★★★★ press Enter ★★★★★★★★2");
-			switch (selection) {
+			switch (selection) {		
 			case 1:
-				//				showAllExercise();
 				searchExerciseData();
 				break;
-
 			case 2:
 				System.out.println("네 무엇인가요?");
 				System.out.print(">>> ");
@@ -97,6 +156,8 @@ public class HealthManage implements AppService {
 					return;
 				}
 				System.out.println(answer + " 이(가) 추가되었습니다.");
+				exercise.setName(answer);
+				exerciseRepository.addExercise(exercise);
 				break;
 
 			default:
@@ -107,64 +168,41 @@ public class HealthManage implements AppService {
 		}
 
 		String newExe = inputString();
-		Exercise newExercise = new Exercise();
-		newExercise.setExe_name(newExe);
+		exercise.setExe_name(newExe);
 		ExerciseRepository repository = new ExerciseRepository();
 
-		boolean wantToExercise = true;
-		while(wantToExercise) {
 
-			System.out.println(newExercise.getExe_name() + " 운동 지금 하실래요?(Y/N)");
+		boolean wantToExercise = true;
+		
+		
+		while(wantToExercise) {
+			System.out.println("운동 지금 하실래요?(Y/N)");
 			System.out.print(">>> ");
 			String exeRn = inputString();
 			if(exeRn.toUpperCase().equals("Y")) {
-				//				exerciseProcess(0);
+				//								exerciseProcess(0);
+				///운동 시작 메서드////
 			} else if(exeRn.toUpperCase().equals("N")){
-				System.out.println("알겠습니다. 목록에만 추가하도록 하겠습니다.aaaaaaaaa");
-				repository.addExercise(newExercise);   //추가
+
+				//				repository.addExercise(exercise);   //추가
 				wantToExercise = false;
+				//				return;
 			} else {
 				System.out.println("다시 입력해주세요.");
 
 			}	
 		}
+
+		if(exercise.getExe_name() != null && !exercise.getExe_name().isEmpty()) {
+			repository.addExercise(exercise);
+			System.out.println("알겠습니다. 목록에만 추가하도록 하겠습니다!");
+		}
 	}
 
 
-	private void searchExerciseData() {
-		//				searchExerciseData();
-		final List<Exercise> exerciseList = exerciseRepository.searchByExercise("true");
-		if(exerciseList.size() > 0) {
-			for(Exercise E : exerciseList) {
-				System.out.println(E);
-			}
-			System.out.printf("운동 종목 개수 %d건", exerciseList.size());
-			System.out.println("==================================");
-			System.out.println("이중에 하고싶은 운동 있으시면 알려주세요! 없다면 0을 입력해주세요.");
-			System.out.print(">>> ");
-			int exe_num = inputInteger();
-
-			if(exe_num != 0) {
-				if(exerciseList.contains(exe_num)) {
-//					exerciseProcess(exe_num);
-				} else {
-					System.out.println("다시 입력해주세요.");
-					return;
-				}
-			} else {
-				System.out.println("이전 메뉴로 돌아갑니다.");
-				return;
-				//				return exerciseManagementScreen();
-			}
-
-		} else { //exerciseList.size() = 0
-			System.out.println("목록이 없네요. 저희 새로운 운동을 시작해야겠어요!");
-			return;
-		}
-
+	public void exerciseProcess(int exe_num) {
+		System.out.println(exerciseRepository.getExercise(exe_num));
 	}
 
 
 }
-
-
