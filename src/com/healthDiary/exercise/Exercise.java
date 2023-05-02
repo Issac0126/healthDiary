@@ -37,4 +37,14 @@ public class Exercise {
     public void setExe_measure(String exe_measure) {
         this.exe_measure = exe_measure;
     }
+
+	@Override
+	public String toString() {
+		return " "+exe_num + "번 \t" + exe_name + " / 뷴류: " + exe_measure;
+	}
+    
+    
+    
+    
+    
 }

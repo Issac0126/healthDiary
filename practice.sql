@@ -8,6 +8,11 @@ CREATE TABLE member (
     in_room	VARCHAR2(5)	DEFAULT 'false' NOT NULL
 );
 
+UPDATE member
+SET grade = 'GOLD'
+WHERE member_number = 21;
+
+
 CREATE TABLE exercise (
 	exe_num	NUMBER(10)		NOT NULL,
 	exe_name	VARCHAR2(30)		NOT NULL,
