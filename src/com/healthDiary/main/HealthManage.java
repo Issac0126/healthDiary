@@ -44,51 +44,52 @@ public class HealthManage implements AppService {
 		}
 	}
 	private void searchExerciseData() {
-		String sql = "SELECT exe_name FROM exercise";
-		try (Connection conn = connection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			ResultSet rs = pstmt.executeQuery();
-			int count = 0;
-			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-			System.out.println("\n운동 목록 보여드릴게요");
-			System.out.println();
-			while (rs.next()) {
-				String exeName = rs.getString("exe_name");
-				System.out.println(exeName);
-				count++;
-			}    
-			System.out.printf("===========총 %d건===========\n", count);
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
+        String sql = "SELECT exe_num, exe_name FROM exercise";
+        try (Connection conn = connection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            int count = 0;
+            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+            System.out.println("\n운동 목록 보여드릴게요");
+            System.out.println();
+            while (rs.next()) {
+                int exeNum = rs.getInt("exe_num");
+                String exeName = rs.getString("exe_name");
+                System.out.println(exeNum + "   " + exeName);
+                count++;
+            }
+            System.out.printf("===========총 %d건===========\n", count);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-		System.out.println("이중에 하고싶은 운동 있으시면 알려주세요! 없다면 0을 입력해주세요.");
-		System.out.print(">>> ");
-		String workOut = inputString();
+        System.out.println("이중에 하고싶은 운동 있으시면 알려주세요! 없다면 0을 입력해주세요.");
+        System.out.print(">>> ");
+        int workOut = inputInteger();
 
-		if(workOut.equals("0")) {
-			System.out.println("----------------PRESS ENTER KEY----------------");
-			return;
-		}
+        if(workOut == 0) {
+            System.out.println("----------------PRESS ENTER KEY----------------");
+            return;
+        }
 
-		try (Connection conn = connection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(
-						"SELECT * FROM exercise WHERE exe_name = ?")) {
-			pstmt.setString(1, workOut);
-			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
-				System.out.println("운동 시작!");
-				/////운동 수행 메서드////
-//				exeStart();
-			} else {
-				System.out.println("존재하지 않는 운동이에요.");
-				return;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+        try (Connection conn = connection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(
+                        "SELECT * FROM exercise WHERE exe_name = ?")) {
+            pstmt.setInt(1, workOut);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()) {
+                System.out.println("운동 시작!");
+                /////운동 수행 메서드////
+//                exeStart();
+            } else {
+                System.out.println("존재하지 않는 운동이에요.");
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 
 	
 	

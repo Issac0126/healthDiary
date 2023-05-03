@@ -30,8 +30,7 @@ public class AppUI {
 		System.out.println("\n1. 회원 관리");
 		System.out.println("2. 운동하러 왔죠");
 		System.out.println("3. 기록 확인하러 왔습니다");
-		System.out.println("4. 출결 체크");
-		System.out.println("5. 프로그램 종료합니다");
+		System.out.println("4. 프로그램 종료합니다");
 		System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
 		System.out.print(">>> ");
 	}
@@ -67,16 +66,7 @@ public class AppUI {
 			System.out.println("2. 운동한 기록을 조회합니다.");
 			System.out.println("-----------------------------");
 			System.out.print(">>> ");
-		}			
-
-	//4. 입실/퇴실 관리
-		public static void attendScreen() {
-			System.out.println("\n\n★★★★★★★★★★★★★★★");
-			System.out.println("1. 입실 처리");
-			System.out.println("2. 퇴실 처리");
-			System.out.println("-----------------------------");
-			System.out.print(">>> ");
-		}			
+		}					
 		
 } //END MAIN
 

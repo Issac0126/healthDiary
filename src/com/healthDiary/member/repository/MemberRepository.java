@@ -60,8 +60,7 @@ public class MemberRepository {
 						result.getString("member_name"),
 						result.getString("phone_number"),
 						result.getString("grade"),
-						result.getDate("reg_date"),
-						result.getString("in_Room")
+						result.getDate("reg_date")
 						);
 				memberList.add(member);
 				
@@ -95,8 +94,7 @@ public class MemberRepository {
 						result.getString("member_name"),
 						result.getString("phone_number"),
 						result.getString("grade"),
-						result.getDate("reg_date"),
-						result.getString("in_Room")
+						result.getDate("reg_date")
 						);
 				allMemberList.add(member);
 			}

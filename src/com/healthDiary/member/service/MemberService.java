@@ -152,7 +152,7 @@ public class MemberService implements AppService {
 	                .atZone(ZoneId.systemDefault())
 	                .toLocalDateTime();
 	        
-	        between = ChronoUnit.YEARS.between(memberDateTime.now() , LocalDateTime.now());
+	        between = ChronoUnit.YEARS.between(memberDateTime , LocalDateTime.now());
 //			System.out.println("비트윈"+between);
 //			System.out.println("멤버데이트타임"+memberDateTime);
 //	        memberDateTime = LocalDateTime.now();

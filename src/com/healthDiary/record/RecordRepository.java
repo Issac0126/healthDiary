@@ -3,9 +3,7 @@ package com.healthDiary.record;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.healthDiary.common.DataBaseConnection;
@@ -58,8 +56,7 @@ public class RecordRepository {
 									rs.getString("member_name"),
 									rs.getString("phone_number"),
 									rs.getString("grade"),
-									rs.getDate("reg_date"),
-									rs.getString("in_room")
+									rs.getDate("reg_date")
 						);
 						memList.add(mem);
 					} //while END
@@ -99,39 +96,58 @@ public class RecordRepository {
 	
 	
 	//기록: 특정 번호의 컬럼 반환하기
-		public List<Record> Rec(int memNum) {
-			String sql = "SELECT * FROM record WHERE member_number = '"+memNum+"'";
-			List<Record> selRec = new ArrayList<Record>();
+		public List<RecordAll> RecNumToDate(int memNum) {
+			String sql = "SELECT * FROM record r"
+					+ " LEFT JOIN exercise e ON r.exe_num = e.exe_num"
+					+ " LEFT JOIN member m ON r.member_number = m.member_number"
+					+ " WHERE r.member_number = '"+memNum+"' ORDER BY r.record_day ASC";
+			List<RecordAll> selRec = new ArrayList<RecordAll>();
 			
 			try (Connection conn = connection.getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql);
 					ResultSet rs = pstmt.executeQuery()
 					){
 						
-				
-//						while(rs.next()) {
-//							Record rec = new Record(
-//										rs.getInt("record_num"),
-//										rs.getInt("member_number"),
-//										rs.getInt("exe_num"),
-//										rs.getInt("record_score"),
-//										rs.getInt("exe_level"),
-//										rs.getDate("record_day")
-//								);
-//								selRec.add(rec);
-//							}
+						while(rs.next()) {
+							RecordAll rec = new RecordAll(
+										rs.getInt("record_num"),
+										rs.getInt("member_number"),
+										rs.getInt("exe_num"),										
+										rs.getString("member_name"),
+										rs.getString("exe_name"),
+										rs.getString("exe_measure"),
+										rs.getInt("record_score"),
+										rs.getDate("record_day")
+								);
+								selRec.add(rec);
+							}
+						return selRec;
 			}catch (Exception e) {
 				e.printStackTrace();
 			} // try END 
 			return null;
-			
 
 		}
 
-	
-//		public Record(int recordNum, int userNumber, int exeNum, int recordScore, int exeLevel,
-//				LocalDateTime recordDay)
-	
+
+	//기록: 기록 추가하기
+		public void RecAdd(RecordAll recAll) {	
+			String sql = "INSERT INTO record VALUES (record_seq.NEXTVAL, "
+					+recAll.getUserNum()+", "+recAll.getExeNum()+", "+recAll.getRecordScore()+", sysout)";
+			
+			try(Connection conn = connection.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.executeUpdate();	
+				
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
 	
 	
 	

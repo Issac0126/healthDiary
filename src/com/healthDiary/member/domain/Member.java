@@ -9,18 +9,16 @@ public class Member {
     private String phoneNum;
     private String grade;
     private Date regDate;
-    private String inRoom;
     
     public Member() {}
 
-    public Member(int memberNum, String memberName, String phoneNum, String grade, Date regDate, String inRoom) {
+    public Member(int memberNum, String memberName, String phoneNum, String grade, Date regDate) {
         super();
         MemberNum = memberNum;
         MemberName = memberName;
         this.phoneNum = phoneNum;
         this.grade = grade;
         this.regDate = regDate;
-        this.inRoom = inRoom;
     }
 
     public int getMemberNum() {
@@ -62,26 +60,15 @@ public class Member {
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
-
-    public String isInRoom() {
-        return inRoom;
-    }
-
-    public void setInRoom(String inRoom) {
-        this.inRoom = inRoom;
-    }
-
     
     
     // 기록 확인 중 추가.
 	@Override
 	public String toString() {
-		String room = "입실중";
-		if(this.inRoom.equals("false")) room = "퇴실";
 		int lastHPIdx = phoneNum.lastIndexOf("-");
 		
 		return " "+MemberNum + "번 \t"+MemberName +"  "+ phoneNum.substring(lastHPIdx+1) +"     "
-				+ grade +"  "+ regDate +"  "+ room;
+				+ grade +"  "+ regDate;
 	}
 
     

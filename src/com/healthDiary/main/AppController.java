@@ -22,9 +22,6 @@ public class AppController {
 			service = new RecordStart(); 
 			break;
 		case 4:
-			
-			break;
-		case 5:
 			System.out.println("\n\n프로그램을 종료합니다.");
 			System.exit(0);
 			break;

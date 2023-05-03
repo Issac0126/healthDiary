@@ -1,5 +1,6 @@
 package com.healthDiary.record;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import com.healthDiary.common.AppService;
@@ -10,20 +11,18 @@ public class Record implements AppService {
 	private int userNumber; //회원 번호
 	private int exeNum; //운동 종목 번호
 	private int recordScore; //기록
-	private int exeLevel; //운동 레벨
-	private LocalDateTime recordDay; //운동한 날짜
+	private Date recordDay;
 	
 	public Record() {
 	}
 
-	public Record(int recordNum, int userNumber, int exeNum, int recordScore, int exeLevel,
-			LocalDateTime recordDay) {
+	public Record(int recordNum, int userNumber, int exeNum, int recordScore,
+			Date recordDay) {
 		super();
 		this.recordNum = recordNum;
 		this.userNumber = userNumber;
 		this.exeNum = exeNum;
 		this.recordScore = recordScore;
-		this.exeLevel = exeLevel;
 		this.recordDay = recordDay;
 	}
 	
@@ -33,8 +32,8 @@ public class Record implements AppService {
 	
 	@Override //불렀을 경우 출력
 	public String toString() {
-		return "recordGetSet [recordNum=" + recordNum + ", userNumber=" + userNumber + ", exeNum=" + exeNum
-				+ ", recordScore=" + recordScore + ", exeLevel=" + exeLevel + ", recordDay=" + recordDay + "]";
+		return " "+recordNum+"번 \t" + userNumber + ", exeNum=" + exeNum
+				+ ", recordScore=" + recordScore + ", recordDay=" + recordDay + "]";
 	}
 
 	public int getRecordNum() {
@@ -68,20 +67,12 @@ public class Record implements AppService {
 	public void setRecordScore(int recordScore) {
 		this.recordScore = recordScore;
 	}
-
-	public int getExeLevel() {
-		return exeLevel;
-	}
-
-	public void setExeLevel(int exeLevel) {
-		this.exeLevel = exeLevel;
-	}
-
-	public LocalDateTime getRecordDay() {
+	
+	public Date getRecordDay() {
 		return recordDay;
 	}
 
-	public void setRecordDay(LocalDateTime recordDay) {
+	public void setRecordDay(Date recordDay) {
 		this.recordDay = recordDay;
 	}
 

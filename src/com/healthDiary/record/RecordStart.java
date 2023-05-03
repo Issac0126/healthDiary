@@ -4,6 +4,9 @@ import static com.healthDiary.view.AppUI.inputInteger;
 import static com.healthDiary.view.AppUI.inputString;
 import static com.healthDiary.view.AppUI.recordScreen;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import com.healthDiary.common.AppService;
@@ -14,7 +17,9 @@ import com.healthDiary.view.AppUI;
 
 public class RecordStart implements AppService {
 
-
+	
+	boolean userflag = false;
+	
 	private static DataBaseConnection connection
 	= DataBaseConnection.getInstance();
 	private final RecordRepository recordRepository = new RecordRepository();
@@ -42,7 +47,12 @@ public class RecordStart implements AppService {
 	
 	//1. 운동 시작하기
 	private void exeStart() { 
-		System.out.println("\n\n★ 오늘은 어떤 운동을 하실 건가요?");
+		
+		Member user = memSearch();
+		if(user==null) return;			
+		
+		
+		System.out.println("\n\n★ 어떤 운동을 하실 건가요?");
 		System.out.print("(목록을 보려면 '목록 보기'를 입력해주세요.) \n > ");
 		String answer = inputString().trim();
 		String sql = null;
@@ -132,8 +142,30 @@ public class RecordStart implements AppService {
 		System.out.printf("총 운동시간: %d초\n", sec);
 		System.out.println("       ★★ 수고하셨습니다! ★★    ");
 		System.out.println("\n──────────────────────────────\n\n");
+		
+		RecordAll newRec = null;
+		LocalDateTime memberDateTime = LocalDateTime.now();
+        Date date = (Date) Date.from(memberDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		
+		if(CST.equals("C")) {
+			newRec = new RecordAll(
+					0, user.getMemberNum(), startExeNum, user.getMemberName(), 
+					selExeName, CST, exeCount, date
+					);			
+		}else {
+			newRec = new RecordAll(
+					0, user.getMemberNum(), startExeNum, user.getMemberName(), 
+					selExeName, CST, sec, date
+					);			
+		}
+
+		recordRepository.RecAdd(newRec);
+
+		System.out.println(" --★--> Enter <--★-- ");
+		inputString();
 
 	}
+	
 	
 	
 	//2. 운동 기록 조회하기
@@ -141,8 +173,30 @@ public class RecordStart implements AppService {
 		Member selMem = memSearch();
 		if(selMem==null) return;
 		
-		System.out.println(selMem.getMemberName()+"님의 운동 기록을 조회합니다.");
+		System.out.println("\n"+selMem.getMemberName()+"님의 운동 기록을 조회합니다···\n");
+		List<RecordAll> recList = recordRepository.RecNumToDate(selMem.getMemberNum());
 		
+
+		if(recList.size()!=0) {
+			System.out.println("\n─────────────── 검색 목록 ─────────────────");
+			System.out.println(" 번호 \t운동일       운동 ");
+			for(RecordAll re : recList) {
+				System.out.println(re);
+			}
+			System.out.println("────────────────────────────────────────\n\n");	
+		} else {
+			System.out.println("조회된 운동 기록이 없습니다! 운동 좀 하세요!");
+//			System.out.println("▷ Y 입력으로 바로 운동하러 가기");
+//			System.out.print("▶ ");
+//			String answer = inputString().toUpperCase();
+//			if(answer.equals("Y")) exeStart();
+//			else {
+//				System.out.println("운동 안하시나요? 아쉽습니다.....");
+//			}
+			System.out.println(" --★--> Enter <--★-- ");
+			inputString();
+			return;
+		}
 		
 		
 		
@@ -150,6 +204,7 @@ public class RecordStart implements AppService {
 	
 	//회원 정보 확인하기 리턴: Member
 	private Member memSearch() {
+		
 		System.out.println("\n★ 회원 정보를 확인합니다.");
 		System.out.print("이름: ");
 		String anName = inputString();
@@ -183,24 +238,10 @@ public class RecordStart implements AppService {
 		System.out.println("\n\n목록에 포함된 번호만 골라주세요.");
 		return null;
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 	}
 	
-	//특정 회원의 기록 출력하기
 	
 	
 	
