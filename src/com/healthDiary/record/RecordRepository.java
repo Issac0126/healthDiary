@@ -41,6 +41,7 @@ public class RecordRepository {
 		return exeList;
 	}
 	
+	
 	// 회원 목록 반환
 		public List<Member> memListSearch(String sql) {
 			List<Member> memList = new ArrayList<Member>();
@@ -72,7 +73,7 @@ public class RecordRepository {
 	
 	
 
-	//특정 번호의 컬럼 반환하기
+	//운동: 특정 번호의 컬럼 반환하기
 	public List<String> ExeNumToName(int exeNum) {
 		String sql = "SELECT * FROM exercise WHERE exe_num = '"+exeNum+"'";
 		List<String> selExeTwo = new ArrayList<String>();
@@ -95,8 +96,32 @@ public class RecordRepository {
 
 	}
 	
-	
-	
+	/*
+	//기록: 특정 번호의 컬럼 반환하기
+		public List<Record> Rec(int memNum) {
+			String sql = "SELECT * FROM record WHERE member_number = '"+memNum+"'";
+			List<Record> selRec = new ArrayList<Record>();
+			
+			try (Connection conn = connection.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql);
+					ResultSet rs = pstmt.executeQuery()
+					){
+						while(rs.next()) {
+							Record rec = new Record(
+										
+									
+									);
+									
+								return selRec;
+							}
+						}
+				}catch (Exception e) {
+					e.printStackTrace();
+				} // try END 
+			return null;
+
+		}
+	*/
 	
 	
 	

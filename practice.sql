@@ -21,7 +21,7 @@ CREATE TABLE exercise (
 
 CREATE TABLE record (
 	record_num	NUMBER(10)	NOT NULL PRIMARY KEY,
-	user_number	NUMBER(10)	NOT NULL,
+	member_number	NUMBER(10)	NOT NULL,
 	exe_num	NUMBER(10)	NOT NULL,
 	record_score NUMBER(10)	NOT NULL,
 	exe_level	NUMBER(10)	NOT NULL,
@@ -82,4 +82,4 @@ VALUES (member_seq.NEXTVAL, '신난다', '010-2541-7541', '22/12/08', 'SILVER');
 INSERT INTO member (member_number, member_name, phone_number, grade)
 VALUES (member_seq.NEXTVAL, '금요일', '010-3333-7777', 'GOLD');
 
-
+COMMIT;

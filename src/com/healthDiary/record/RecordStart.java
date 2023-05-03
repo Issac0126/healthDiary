@@ -30,7 +30,7 @@ public class RecordStart implements AppService {
 			exeStart();
 			break;
 		case 2:
-			
+			exeRecord();
 			break;
 		default:
 			System.out.println("1~2 중 유효한 번호를 입력해주세요.");
@@ -40,7 +40,7 @@ public class RecordStart implements AppService {
 	
 	
 	
-	//운동 시작하기
+	//1. 운동 시작하기
 	private void exeStart() { 
 		System.out.println("\n\n★ 오늘은 어떤 운동을 하실 건가요?");
 		System.out.print("(목록을 보려면 '목록 보기'를 입력해주세요.) \n > ");
@@ -57,8 +57,7 @@ public class RecordStart implements AppService {
 		List<Exercise> exeList= recordRepository.exeListSearch(sql);			
 		
 		
-		//운동 목록 출력
-		if(exeList.size() >= 1) { 
+		if(exeList.size() >= 1) {  //운동 목록 출력
 			System.out.println("\n\n─────────── 운동 목록 ───────────");
 			System.out.println("운동번호 \t운동 ");
 			for(Exercise e : exeList) {
@@ -73,7 +72,7 @@ public class RecordStart implements AppService {
 		
 		
 		// 시작 운동 번호 고르기
-		System.out.print("\n★★★ 시작할 운동 번호를 골라주세요. ★★★ \n > ");
+		System.out.print("★★★ 시작할 운동 번호를 골라주세요. ★★★ \n > ");
 		int startExeNum = inputInteger();
 		boolean flag = false;
 		
@@ -99,8 +98,11 @@ public class RecordStart implements AppService {
 		long start = System.currentTimeMillis();
 		long end = 0;
 		
-		System.out.println("\n★스톱워치가 시작되었습니다.");
-		System.out.println("'끝'을 입력하면 스톱워치가 종료됩니다.");
+		System.out.println("\n┌───────────────────────────────┐");
+		System.out.println("│           ★★★           \t│");
+		System.out.println("│  스톱워치가 시작되었습니다.      \t│");   
+		System.out.println("│ '끝'을 입력하면 스톱워치가 종료됩니다.\t│");
+		System.out.println("└───────────────────────────────┘\n");
 		
 		while(true) {
 			System.out.print("★입력란: ");
@@ -124,40 +126,68 @@ public class RecordStart implements AppService {
 //			selExeMeasure = "타이머";
 		}
 		
-		System.out.println("\n──────── ★★ 오늘의 운동 ★★ ────────\n");
+		System.out.println("\n─────── ★★ 오늘의 운동 ★★ ───────\n");
 		System.out.println("종목: "+selExeName);
 		if(CST.equals("C"))System.out.println("운동 횟수: "+exeCount+"회");
 		System.out.printf("총 운동시간: %d초\n", sec);
-		System.out.println("        ★★ 수고하셨습니다! ★★    ");
-		System.out.println("\n────────────────────────────────\n\n");
+		System.out.println("       ★★ 수고하셨습니다! ★★    ");
+		System.out.println("\n──────────────────────────────\n\n");
 
 	}
 	
 	
-	
-	//회원 정보 확인하기
+	//2. 운동 기록 조회하기
 	private void exeRecord() {
-		System.out.println("회원 정보를 확인합니다.");
-		System.out.println("이름을 입력해주세요.");
+		Member selMem = memSearch();
+		if(selMem==null) return;
+		
+		System.out.println(selMem.getMemberName()+"님의 운동 기록을 조회합니다.");
+		System.out.println("조회할 운동");
+		
+		
+		
+	} 
+	
+	//회원 정보 확인하기 리턴: Member
+	private Member memSearch() {
+		System.out.println("\n★ 회원 정보를 확인합니다.");
+		System.out.print("이름: ");
 		String anName = inputString();
 		
-		String sql = "SELECT * FROM member";
+		String sql = "SELECT * FROM member WHERE member_name = '"+anName+"'";
 		List<Member> memList= recordRepository.memListSearch(sql);
-		System.out.println("\n\n─────────── 검색 목록 ───────────");
-		for(Member m : memList) {
-			if(m.getMemberName().equals(anName)) {
-				System.out.println(m);
+		
+		if(memList.size()!=0) {
+			System.out.println("\n─────────────── 검색 목록 ───────────────");
+			System.out.println(" 번호 \t이름  번호 뒷자리  등급    가입일      재실여부");
+			for(Member m : memList) {
+				if(m.getMemberName().equals(anName)) {
+					System.out.println(m);
+				}
 			}
+			System.out.println("──────────────────────────────────────");			
+		} else {
+			System.out.println("검색 기록이 없습니다. 검색어를 다시 한 번 확인해주세요.");
+			return null;
 		}
-		System.out.println("──────────────────────────────");
+		System.out.print("★★★ 본인의 회원 번호를 골라주세요. ★★★ \n > ");
+		int selMyNum = inputInteger();
+		boolean flag = false;
 		
+		for(Member e : memList) {
+			if(e.getMemberNum() == selMyNum) {
+				flag= true;
+				return e;
+			}
+		} 
 		
-		
-		
-		
-		
-		
+		System.out.println("\n\n목록에 포함된 번호만 골라주세요.");
+		return null;
 	}
+	
+	//특정 회원의 기록 출력하기
+	
+	
 	
 	
 	

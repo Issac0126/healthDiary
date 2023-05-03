@@ -73,14 +73,15 @@ public class Member {
 
     
     
+    // 기록 확인 중 추가.
 	@Override
 	public String toString() {
 		String room = "입실중";
 		if(this.inRoom.equals("false")) room = "퇴실";
+		int lastHPIdx = phoneNum.lastIndexOf("-");
 		
-		return " "+MemberNum + "번 \t"+MemberName +" "+ phoneNum + " "
-				+ grade + " regDate=" + regDate + room;
-//		return " "+exe_num + "번 \t" + exe_name + " / 뷴류: " + exe_measure;
+		return " "+MemberNum + "번 \t"+MemberName +"  "+ phoneNum.substring(lastHPIdx+1) +"     "
+				+ grade +"  "+ regDate +"  "+ room;
 	}
 
     
