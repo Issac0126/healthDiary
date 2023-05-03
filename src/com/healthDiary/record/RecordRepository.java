@@ -133,13 +133,12 @@ public class RecordRepository {
 	//기록: 기록 추가하기
 		public void RecAdd(RecordAll recAll) {	
 			String sql = "INSERT INTO record VALUES (record_seq.NEXTVAL, "
-					+recAll.getUserNum()+", "+recAll.getExeNum()+", "+recAll.getRecordScore()+", sysout)";
+					+recAll.getUserNum()+", "+recAll.getExeNum()+", "+recAll.getRecordScore()+", sysdate)";
 			
 			try(Connection conn = connection.getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				
 				pstmt.executeUpdate();	
-				
-				
 				
 			} catch (Exception e) {
 				e.printStackTrace();

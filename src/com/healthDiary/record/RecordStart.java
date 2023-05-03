@@ -20,8 +20,7 @@ public class RecordStart implements AppService {
 	
 	boolean userflag = false;
 	
-	private static DataBaseConnection connection
-	= DataBaseConnection.getInstance();
+	private static DataBaseConnection connection = DataBaseConnection.getInstance();
 	private final RecordRepository recordRepository = new RecordRepository();
 	
 	
@@ -46,7 +45,7 @@ public class RecordStart implements AppService {
 	
 	
 	//1. 운동 시작하기
-	private void exeStart() { 
+	public void exeStart() { 
 		
 		Member user = memSearch();
 		if(user==null) return;			
@@ -144,8 +143,8 @@ public class RecordStart implements AppService {
 		System.out.println("\n──────────────────────────────\n\n");
 		
 		RecordAll newRec = null;
-		LocalDateTime memberDateTime = LocalDateTime.now();
-        Date date = (Date) Date.from(memberDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        Date date = new Date(15);
+        System.out.println("date: "+date);
 		
 		if(CST.equals("C")) {
 			newRec = new RecordAll(
@@ -158,7 +157,7 @@ public class RecordStart implements AppService {
 					selExeName, CST, sec, date
 					);			
 		}
-
+		System.out.println("두근두근 메서드 들어가볼게"+newRec);
 		recordRepository.RecAdd(newRec);
 
 		System.out.println(" --★--> Enter <--★-- ");
@@ -178,23 +177,25 @@ public class RecordStart implements AppService {
 		
 
 		if(recList.size()!=0) {
-			System.out.println("\n─────────────── 검색 목록 ─────────────────");
+			System.out.println("─────────────── 검색 목록 ─────────────────");
 			System.out.println(" 번호 \t운동일       운동 ");
 			for(RecordAll re : recList) {
 				System.out.println(re);
 			}
-			System.out.println("────────────────────────────────────────\n\n");	
-		} else {
-			System.out.println("조회된 운동 기록이 없습니다! 운동 좀 하세요!");
-//			System.out.println("▷ Y 입력으로 바로 운동하러 가기");
-//			System.out.print("▶ ");
-//			String answer = inputString().toUpperCase();
-//			if(answer.equals("Y")) exeStart();
-//			else {
-//				System.out.println("운동 안하시나요? 아쉽습니다.....");
-//			}
+			System.out.println("────────────────────────────────────────\n");	
 			System.out.println(" --★--> Enter <--★-- ");
 			inputString();
+		} else {
+			System.out.println("조회된 운동 기록이 없습니다! 운동 좀 하세요!");
+			System.out.println("▷ Y 입력으로 바로 운동하러 가기");
+			System.out.print("▶ ");
+			String answer = inputString().toUpperCase();
+			if(answer.equals("Y")) exeStart();
+			else {
+				System.out.println("운동 안하시나요? 아쉽습니다.....\n");
+				System.out.println(" --★--> Enter <--★-- ");
+				inputString();
+			}
 			return;
 		}
 		
@@ -214,7 +215,7 @@ public class RecordStart implements AppService {
 		
 		if(memList.size()!=0) {
 			System.out.println("\n─────────────── 검색 목록 ───────────────");
-			System.out.println(" 번호 \t이름  번호 뒷자리  등급    가입일      재실여부");
+			System.out.println(" 번호 \t이름    전화 뒷자리   등급      가입일");
 			for(Member m : memList) {
 				if(m.getMemberName().equals(anName)) {
 					System.out.println(m);
@@ -222,9 +223,12 @@ public class RecordStart implements AppService {
 			}
 			System.out.println("──────────────────────────────────────");			
 		} else {
-			System.out.println("검색 기록이 없습니다. 검색어를 다시 한 번 확인해주세요.");
+			System.out.println("\n '"+anName+"' 회원이 존재하지 않습니다. 검색어를 다시 한 번 확인해주세요.\n");
+			System.out.println(" --★--> Enter <--★-- ");
+			inputString();
 			return null;
 		}
+		
 		System.out.print("★★★ 본인의 회원 번호를 골라주세요. ★★★ \n > ");
 		int selMyNum = inputInteger();
 		boolean flag = false;

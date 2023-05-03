@@ -6,7 +6,6 @@ CREATE TABLE member (
     grade VARCHAR2(10) DEFAULT 'BRONZE' NOT NULL,
     reg_date DATE DEFAULT sysdate NOT NULL
 );
-DROP TABLE member;
 
 CREATE TABLE exercise (
 	exe_num	NUMBER(10)		NOT NULL,
@@ -19,10 +18,8 @@ CREATE TABLE record (
 	member_number	NUMBER(10)	NOT NULL,
 	exe_num	NUMBER(10)	NOT NULL,
 	record_score NUMBER(10)	NOT NULL,
-	exe_level	NUMBER(10)	NOT NULL,
 	record_day DATE DEFAULT sysdate	NULL
 );
-DROP TABLE record;
 
 SELECT * FROM member;
 SELECT * FROM exercise;
@@ -42,16 +39,10 @@ CREATE SEQUENCE record_seq
 
 
 -- 기본데이터
-INSERT INTO exercise
-VALUES (exercise_seq.NEXTVAL, '스쿼트', 'C');
-INSERT INTO exercise
-VALUES (exercise_seq.NEXTVAL, '러닝머신', 'S');
-
---DELETE FROM exercise
---WHERE exe_num = 1;
-
-
-SELECT * FROM record r JOIN exercise e ON r.exe_num = e.exe_num WHERE member_number = '22' ORDER BY r.record_day ASC;
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL, '스쿼트', 'C');
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL, '러닝머신', 'S');
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL, '자전거', 'S');
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL, '턱걸이', 'C');
 
 
 
@@ -81,11 +72,27 @@ VALUES (member_seq.NEXTVAL, '신난다', '010-2541-7541', '22/12/08');
 INSERT INTO member (member_number, member_name, phone_number)
 VALUES (member_seq.NEXTVAL, '금요일', '010-3333-7777');
 
+INSERT INTO member (member_number, member_name, phone_number, reg_date, grade)
+VALUES (member_seq.NEXTVAL, '으갸갹', '010-2540-4555', '20/12/08', 'BRONZE');
+
+INSERT INTO member (member_number, member_name, phone_number, reg_date, grade)
+VALUES (member_seq.NEXTVAL, '밈뮴머', '010-2789-4555', '19/5/08', 'BRONZE');
+
+INSERT INTO member (member_number, member_name, phone_number, reg_date, grade)
+VALUES (member_seq.NEXTVAL, '하동호', '010-2789-4555', '18/3/08', 'BRONZE');
+
+INSERT INTO member (member_number, member_name, phone_number, reg_date, grade)
+VALUES (member_seq.NEXTVAL, '오윤원', '010-4989-7578', '18/5/09', 'BRONZE');
+
+INSERT INTO member (member_number, member_name, phone_number, reg_date, grade)
+VALUES (member_seq.NEXTVAL, '바밤바', '010-4989-7578', '18/6/11', 'BRONZE');
+
+INSERT INTO record VALUES (record_seq.NEXTVAL, 22, 2, 30, '23/05/01');
+INSERT INTO record VALUES (record_seq.NEXTVAL, 22, 2, 20, '23/04/30');
+INSERT INTO record VALUES (record_seq.NEXTVAL, 22, 2, 30, '22/01/25');
+INSERT INTO record VALUES (record_seq.NEXTVAL, 23, 3, 180, '23/05/02');
+INSERT INTO record VALUES (record_seq.NEXTVAL, 25, 2, 130, '23/04/30');
+INSERT INTO record VALUES (record_seq.NEXTVAL, 25, 1, 5, '23/04/25');
+INSERT INTO record VALUES (record_seq.NEXTVAL, 25, 1, 12, '23/01/16');
+
 COMMIT;
-
-INSERT INTO record VALUES (record_seq.NEXTVAL, 22, 2, 30, 1, '23/05/01');
-INSERT INTO record VALUES (record_seq.NEXTVAL, 22, 2, 30, 1, '23/04/30');
-INSERT INTO record VALUES (record_seq.NEXTVAL, 22, 2, 30, 1, '22/01/25');
-INSERT INTO record VALUES (record_seq.NEXTVAL, 23, 3, 50, 1, '23/05/02');
-INSERT INTO record VALUES (record_seq.NEXTVAL, 25, 3, 150, 1, '23/04/30');
-

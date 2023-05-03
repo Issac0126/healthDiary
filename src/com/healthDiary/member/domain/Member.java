@@ -67,7 +67,7 @@ public class Member {
 	public String toString() {
 		int lastHPIdx = phoneNum.lastIndexOf("-");
 		
-		return " "+MemberNum + "번 \t"+MemberName +"  "+ phoneNum.substring(lastHPIdx+1) +"     "
+		return " "+MemberNum + "번 \t"+MemberName +"   "+ phoneNum.substring(lastHPIdx+1) +"     "
 				+ grade +"  "+ regDate;
 	}
 

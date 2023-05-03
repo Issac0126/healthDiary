@@ -1,5 +1,7 @@
 package com.healthDiary.exercise.repository;
 
+import static com.healthDiary.view.AppUI.inputString;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,10 +22,7 @@ public class ExerciseRepository {
     phone_number VARCHAR(20) NOT NULL,
     grade VARCHAR2(10) DEFAULT 'BRONZE' NOT NULL,
     reg_date DATE DEFAULT sysdate NOT NULL,
-    in_room	VARCHAR2(5)	DEFAULT 'false' NOT NULL
 	);
-
-	DROP TABLE member;
 
 	CREATE TABLE exercise (
 		exe_num	NUMBER(10)		NOT NULL,
@@ -36,15 +35,8 @@ public class ExerciseRepository {
 		user_number	NUMBER(10)	NOT NULL,
 		exe_num	NUMBER(10)	NOT NULL,
 		record_score NUMBER(10)	NOT NULL,
-		exe_level	NUMBER(10)	NOT NULL,
 		record_day DATE DEFAULT sysdate	NULL
 	);
-	
-	
-	SELECT * FROM member;
-	SELECT * FROM exercise;
-	SELECT * FROM record;
-	DROP TABLE exercise;
 	
 	CREATE SEQUENCE member_seq
 	    START WITH 1
@@ -57,11 +49,8 @@ public class ExerciseRepository {
 	CREATE SEQUENCE record_seq
 	    START WITH 1
 	    MAXVALUE 10000;
-	
-	DROP SEQUENCE exercise_seq;
-
-	DELETE FROM exercise
-	WHERE exe_num = 1;*/
+	    
+	    */
 
 	public int addExercise(Exercise newExercise) {
 		String sql = "INSERT INTO exercise "
@@ -76,6 +65,8 @@ public class ExerciseRepository {
 			} else {
 				System.out.printf("\n%s운동 등록에 실패했습니다ㅠㅠ", newExercise.getExe_name());
 			}
+			System.out.println("\n --★--> Enter <--★-- ");
+			inputString();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -118,7 +109,6 @@ public class ExerciseRepository {
 	}
 
 	private List<Exercise>exercise;
-	
 	public void deleteExercise(String select) {}
 
 }
