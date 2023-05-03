@@ -81,7 +81,7 @@ public class MemberService implements AppService {
 	
 	
 	private List<Member> searchMember() {
-		System.out.print("조회할 회원의 이름: ");
+		System.out.print("★ 조회할 회원의 이름: ");
 		String name = inputString();
 		
 		return memberRepository.findMemberList(name);
@@ -93,9 +93,9 @@ public class MemberService implements AppService {
 		List<Member> members = searchMember();
 		
 		if(members.isEmpty()) {
-			System.out.println("등록된 회원이 없습니다");
+			System.out.println("\n★ 등록된 회원이 없습니다");
 		} else {
-			System.out.println("조회된 회원 결과: " + members.size() + "명");
+			System.out.println("\n★ 조회된 회원 결과: " + members.size() + "명");
 			for(int i=0; i<members.size(); i++) {
 				System.out.println("회원번호:" + members.get(i).getMemberNum() + " 이름:" +
 						members.get(i).getMemberName() + " 전화번호:" +
@@ -113,7 +113,7 @@ public class MemberService implements AppService {
 	private void allList() {
 		List<Member> allMember = memberRepository.searchMemberList();
 		
-		System.out.println("조회된 회원 결과: " + allMember.size() + "명");
+		System.out.println("\n★ 조회된 회원 결과: " + allMember.size() + "명");
 		
 		for(int i=0; i<allMember.size(); i++) {
 			System.out.println("회원번호:" + allMember.get(i).getMemberNum() + 
@@ -129,7 +129,7 @@ public class MemberService implements AppService {
 	private void deleteMember() {
 		
 		if(showMemberList() > 0) {
-			System.out.print("탈퇴할 회원의 번호: ");
+			System.out.print("\n★ 탈퇴할 회원의 번호: ");
 			int delMemberNum = inputInteger();
 			memberRepository.deleteMember(delMemberNum);
 		}

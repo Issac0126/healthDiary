@@ -3,6 +3,7 @@ package com.healthDiary.record;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -96,7 +97,7 @@ public class RecordRepository {
 
 	}
 	
-	/*
+	
 	//기록: 특정 번호의 컬럼 반환하기
 		public List<Record> Rec(int memNum) {
 			String sql = "SELECT * FROM record WHERE member_number = '"+memNum+"'";
@@ -106,25 +107,30 @@ public class RecordRepository {
 					PreparedStatement pstmt = conn.prepareStatement(sql);
 					ResultSet rs = pstmt.executeQuery()
 					){
-						while(rs.next()) {
-							Record rec = new Record(
-										
-									
-									);
-									
-								return selRec;
-							}
-						}
-				}catch (Exception e) {
-					e.printStackTrace();
-				} // try END 
+						
+				
+//						while(rs.next()) {
+//							Record rec = new Record(
+//										rs.getInt("record_num"),
+//										rs.getInt("member_number"),
+//										rs.getInt("exe_num"),
+//										rs.getInt("record_score"),
+//										rs.getInt("exe_level"),
+//										rs.getDate("record_day")
+//								);
+//								selRec.add(rec);
+//							}
+			}catch (Exception e) {
+				e.printStackTrace();
+			} // try END 
 			return null;
+			
 
 		}
-	*/
+
 	
-	
-	
+//		public Record(int recordNum, int userNumber, int exeNum, int recordScore, int exeLevel,
+//				LocalDateTime recordDay)
 	
 	
 	

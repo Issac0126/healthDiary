@@ -142,7 +142,7 @@ public class RecordStart implements AppService {
 		if(selMem==null) return;
 		
 		System.out.println(selMem.getMemberName()+"님의 운동 기록을 조회합니다.");
-		System.out.println("조회할 운동");
+		
 		
 		
 		
@@ -180,9 +180,24 @@ public class RecordStart implements AppService {
 				return e;
 			}
 		} 
-		
 		System.out.println("\n\n목록에 포함된 번호만 골라주세요.");
 		return null;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 	//특정 회원의 기록 출력하기
