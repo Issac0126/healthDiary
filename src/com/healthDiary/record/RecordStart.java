@@ -1,14 +1,14 @@
 package com.healthDiary.record;
 
-import static com.healthDiary.view.AppUI.*;
+import static com.healthDiary.view.AppUI.inputInteger;
+import static com.healthDiary.view.AppUI.inputString;
+import static com.healthDiary.view.AppUI.recordScreen;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import com.healthDiary.common.AppService;
 import com.healthDiary.common.DataBaseConnection;
-import com.healthDiary.exercise.Exercise;
+import com.healthDiary.exercise.domain.Exercise;
 import com.healthDiary.member.domain.Member;
 import com.healthDiary.view.AppUI;
 

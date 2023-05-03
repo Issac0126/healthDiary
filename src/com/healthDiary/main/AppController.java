@@ -1,6 +1,7 @@
 package com.healthDiary.main;
 
 import com.healthDiary.common.AppService;
+import com.healthDiary.exercise.service.ExerciseService;
 import com.healthDiary.member.service.MemberService;
 import com.healthDiary.record.RecordStart;
 
@@ -15,7 +16,7 @@ public class AppController {
 			service = new MemberService();
 			break;
 		case 2:
-			
+			service = new HealthManage();
 			break;
 		case 3:
 			service = new RecordStart(); 

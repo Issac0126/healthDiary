@@ -47,5 +47,11 @@ public class Exercise {
 	public boolean contains(String select) {
 		return exe_name.equals(select);
 	}
+	
+	@Override
+	public String toString() {
+		return " "+exe_num + "번 \t" + exe_name + " / 뷴류: " + exe_measure;
+	}
+	
 
 }

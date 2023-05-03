@@ -51,12 +51,12 @@ public class AppUI {
 	
 	//2. 운동종목 관리 시스템
 		public static void exerciseScreen() {
-			System.out.println("\n\n★★★★★★★★★★★★★★★★★★");
+			System.out.println("\n\n★★★★★★ 운동 종목 관리 시스템 ★★★★★★");
 			System.out.println("운동종목을 관리합니다");
 			System.out.println("1. 새로운 운동종목을 추가합니다");
 			System.out.println("2. 운동 종목의 목록을 조회합니다");
 			System.out.println("3. 등록된 운동종목을 삭제합니다");
-			System.out.println("★★★★★★★★★★★★★★★★★★");
+			System.out.println("-----------------------------");
 			System.out.print(">>> ");
 		}	
 		
@@ -71,10 +71,10 @@ public class AppUI {
 
 	//4. 입실/퇴실 관리
 		public static void attendScreen() {
-			System.out.println("\n\n★★★★★★★★★★★★★★★★★★");
+			System.out.println("\n\n★★★★★★★★★★★★★★★");
 			System.out.println("1. 입실 처리");
 			System.out.println("2. 퇴실 처리");
-			System.out.println("★★★★★★★★★★★★★★★★★★");
+			System.out.println("-----------------------------");
 			System.out.print(">>> ");
 		}			
 		

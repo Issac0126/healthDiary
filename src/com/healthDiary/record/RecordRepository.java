@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.healthDiary.common.DataBaseConnection;
-import com.healthDiary.exercise.Exercise;
+import com.healthDiary.exercise.domain.Exercise;
 import com.healthDiary.member.domain.Member;
 
 public class RecordRepository {
