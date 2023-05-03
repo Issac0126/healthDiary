@@ -1,4 +1,4 @@
-package com.java.common;
+package com.healthDiary.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

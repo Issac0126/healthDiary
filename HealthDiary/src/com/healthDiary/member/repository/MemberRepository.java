@@ -1,9 +1,9 @@
-package com.java.member.repository;
+package com.healthDiary.member.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.java.member.domain.Member;
+import com.healthDiary.member.domain.Member;
 
 public class MemberRepository {
 

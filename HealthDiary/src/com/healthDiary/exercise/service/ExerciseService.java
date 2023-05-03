@@ -1,15 +1,16 @@
-package com.java.exercise.domain.service;
+package com.healthDiary.exercise.service;
 
-import static com.java.view.AppUI.exerciseManagementScreen;
-import static com.java.view.AppUI.inputInteger;
-import static com.java.view.AppUI.inputString;
+import static com.healthDiary.view.AppUI.exerciseScreen;
+import static com.healthDiary.view.AppUI.inputInteger;
+import static com.healthDiary.view.AppUI.inputString;
 
 import java.util.List;
 
-import com.java.common.AppService;
-import com.java.exercise.domain.Exercise;
-import com.java.exercise.repository.ExerciseRepository;
-import com.java.member.repository.MemberRepository;
+import com.healthDiary.common.AppService;
+import com.healthDiary.exercise.domain.Exercise;
+import com.healthDiary.exercise.repository.ExerciseRepository;
+import com.healthDiary.member.repository.MemberRepository;
+import com.healthDiary.record.RecordStart;
 
 public class ExerciseService implements AppService{
 
@@ -17,9 +18,9 @@ public class ExerciseService implements AppService{
 	private final ExerciseRepository exerciseRepository = new ExerciseRepository();
 
 	@Override
-	public void start() {
+	public void Start() {
 		while (true) {
-			exerciseManagementScreen();
+			exerciseScreen();
 			int selection = inputInteger();
 			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★1");
 			switch (selection) {
@@ -27,7 +28,6 @@ public class ExerciseService implements AppService{
 				insertExercise();
 				break;
 			case 2:
-//				showAllExercise();
 				searchExerciseData();
 				break;
 			case 3:
@@ -52,13 +52,11 @@ public class ExerciseService implements AppService{
 	//2. 운동 조회
 		private List<Exercise> searchExerciseData() {
 			System.out.println("운동 목록 보여드릴게요.");
-			//운동 목록 조회			
 			return null;
 			
 		}
-	private List<Exercise> exerciseList = exerciseRepository.searchByExercise("true");
+	private List<Exercise> exerciseList = exerciseRepository.searchByExercise(0, "true");
 	public void showAllExercise() {
-		//				searchExerciseData();
 
 		if(exerciseList.size() > 0) {
 			for(Exercise E : exerciseList) {
@@ -72,7 +70,7 @@ public class ExerciseService implements AppService{
 
 			if(exe_num != 0) {
 				if(exerciseList.contains(exe_num)) {
-					exerciseProcess(exe_num);
+//					exeStart(exe_num);
 				} else {
 					System.out.println("다시 입력해주세요.");
 					return;
@@ -80,7 +78,6 @@ public class ExerciseService implements AppService{
 			} else {
 				System.out.println("이전 메뉴로 돌아갑니다.");
 				return;
-//				return exerciseManagementScreen();
 			}
 
 		} else { //exerciseList.size() = 0
@@ -97,7 +94,6 @@ public class ExerciseService implements AppService{
 		showAllExercise();
 		System.out.print(">>> ");
 		int delExe = inputInteger();
-		//int String 중에 어떤걸로 받을까 int가 낫겠지
 		if(exerciseList.contains(delExe)){
 			System.out.println("정말 삭제할까요?(Y/N)");
 			String delAnswer = inputString();
@@ -119,29 +115,18 @@ public class ExerciseService implements AppService{
 
 
 
-	//운동 수행하기
-	public void exerciseProcess(int exe_num) {
-		System.out.println("운동을 시작합니다!");
-		System.out.println("시간 잴게요!");
-		
-		long beforeTime = System.currentTimeMillis(); //시작
-        		        
-		long afterTime = System.currentTimeMillis(); // 끝
-		long secDiffTime = (afterTime - beforeTime)/1000;
-		System.out.println("수행시간: " + secDiffTime + "초");
-
-	}
+//	//운동 수행하기
+//	public void exerciseProcess(int exe_num) {
+//		System.out.println("운동을 시작합니다!");
+//		System.out.println("시간 잴게요!");
+//		
+//		long beforeTime = System.currentTimeMillis(); //시작
+//        		        
+//		long afterTime = System.currentTimeMillis(); // 끝
+//		long secDiffTime = (afterTime - beforeTime)/1000;
+//		System.out.println("수행시간: " + secDiffTime + "초");
+//
+//	}
 
 
 }
-
-
-/*
- * 신경쓸것들 목록
- * return하면 제대로 돌아가는지
- * 운동 수행하기에서 이름 입력해서 넣는거 맞는건지
- * sql 반영시켜서 변수명 바꾸기
- * 멘트 수정할게 있으면 좀 바꾸기
- * 다른 멤버들꺼 pull해서 합쳐보기
- * 종목 조회를 이름 입력받기보다 종목 개수가 얼마 되지 않으니 전체 조회로 하는게 어떤지 제안하기
- */

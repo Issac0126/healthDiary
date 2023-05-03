@@ -1,8 +1,8 @@
-package com.java.main;
+package com.healthDiary.main;
 
-import static com.java.view.AppUI.inputInteger;
+import static com.healthDiary.view.AppUI.inputInteger;
 
-import com.java.view.AppUI;
+import com.healthDiary.view.AppUI;
 
 public class Main {
 	public static void main(String[] args) {

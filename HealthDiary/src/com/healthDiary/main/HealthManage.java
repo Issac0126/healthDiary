@@ -1,8 +1,8 @@
-package com.java.main;
+package com.healthDiary.main;
 
-import static com.java.view.AppUI.exerciseManagementScreen;
-import static com.java.view.AppUI.inputInteger;
-import static com.java.view.AppUI.inputString;
+import static com.healthDiary.view.AppUI.exerciseScreen;
+import static com.healthDiary.view.AppUI.inputInteger;
+import static com.healthDiary.view.AppUI.inputString;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,10 +11,11 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
-import com.java.common.AppService;
-import com.java.common.DataBaseConnection;
-import com.java.exercise.domain.Exercise;
-import com.java.exercise.repository.ExerciseRepository;
+import com.healthDiary.common.AppService;
+import com.healthDiary.common.DataBaseConnection;
+import com.healthDiary.exercise.domain.Exercise;
+import com.healthDiary.exercise.repository.ExerciseRepository;
+import com.healthDiary.record.RecordRepository;
 
 
 public class HealthManage implements AppService {
@@ -24,8 +25,8 @@ public class HealthManage implements AppService {
 	Exercise exercise = new Exercise();
 
 	@Override
-	public void start() {
-		exerciseManagementScreen();
+	public void Start() {
+		exerciseScreen();
 		int selection = inputInteger();
 
 		switch (selection) {
@@ -34,7 +35,6 @@ public class HealthManage implements AppService {
 			break;
 		case 2:  //운동 목록 조회
 			searchExerciseData();
-			//			ExerciseRepository.showAllExercise();
 			break;
 		case 3:  //운동 삭제
 			delExercise();
@@ -79,7 +79,7 @@ public class HealthManage implements AppService {
 			if(rs.next()) {
 				System.out.println("운동 시작!");
 				/////운동 수행 메서드////
-
+//				exeStart();
 			} else {
 				System.out.println("존재하지 않는 운동이에요.");
 				return;
@@ -180,13 +180,9 @@ public class HealthManage implements AppService {
 			System.out.print(">>> ");
 			String exeRn = inputString();
 			if(exeRn.toUpperCase().equals("Y")) {
-				//								exerciseProcess(0);
 				///운동 시작 메서드////
 			} else if(exeRn.toUpperCase().equals("N")){
-
-				//				repository.addExercise(exercise);   //추가
 				wantToExercise = false;
-				//				return;
 			} else {
 				System.out.println("다시 입력해주세요.");
 

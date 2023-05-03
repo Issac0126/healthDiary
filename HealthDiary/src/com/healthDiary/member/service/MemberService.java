@@ -1,12 +1,12 @@
-package com.java.member.service;
-import static com.java.view.AppUI.inputInteger;
-import static com.java.view.AppUI.inputString;
+package com.healthDiary.member.service;
+import static com.healthDiary.view.AppUI.inputInteger;
+import static com.healthDiary.view.AppUI.inputString;
 
-import com.java.common.AppService;
+import com.healthDiary.common.AppService;
 public class MemberService implements AppService {
 
 	@Override
-	public void start() {
+	public void Start() {
 		while (true) {
 			userManagementScreen();
 			int selection = inputInteger();

@@ -1,4 +1,4 @@
-package com.java.exercise.domain;
+package com.healthDiary.exercise.domain;
 
 public class Exercise {
 	private int exe_num;
@@ -48,11 +48,4 @@ public class Exercise {
 		return exe_name.equals(select);
 	}
 
-	
-//	@Override
-//	public String toString() {
-//		
-//		return super.toString();
-//	}
-//	꼭 필요할까
 }
