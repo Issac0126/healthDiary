@@ -1,6 +1,7 @@
 package com.healthDiary.main;
 
 import com.healthDiary.common.AppService;
+import com.healthDiary.member.service.MemberService;
 import com.healthDiary.record.RecordStart;
 
 public class AppController {
@@ -12,6 +13,7 @@ public class AppController {
 		switch (selectNumber) {
 		case 1:
 //			service = new ???();
+//			service = new MemberService();
 			break;
 		case 2:
 //			service = new ???();
