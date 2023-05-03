@@ -38,15 +38,16 @@ public class AppUI {
 	
 	
 	//1. 회원 관리 화면
-		public static void memberScreen() {
-			System.out.println("\n\n★★★★★★★★★★★★★★★★★★");
-			System.out.println("회원 관리 시스템");
-			System.out.println("1. 회원 추가");
-			System.out.println("2. 회원 정보 수정");
-			System.out.println("3. 회원 탈퇴");
-			System.out.println("★★★★★★★★★★★★★★★★★★");
-			System.out.print(">>> ");
-		}
+    public static void memberScreen() {
+        System.out.println("\n\n★★★★★★ 회원 관리 시스템 ★★★★★★");
+        System.out.println("1. 신규 회원 추가");
+        System.out.println("2. 회원 검색");
+        System.out.println("3. 회원 탈퇴");
+        System.out.println("4. 전체 회원 보기");
+        System.out.println("5. 첫 화면으로");
+        System.out.println("-----------------------------");
+        System.out.print(">>> ");
+    }
 	
 	//2. 운동종목 관리 시스템
 		public static void exerciseScreen() {
@@ -61,11 +62,10 @@ public class AppUI {
 		
 	//3. 기록 관리 시스템
 		public static void recordScreen() {
-			System.out.println("\n\n★★★★★★★★★★★★★★★★★★");
-			System.out.println("기록 관리 시스템");
+			System.out.println("\n\n★★★★★★ 기록 관리 시스템 ★★★★★★");
 			System.out.println("1. 운동을 시작합니다.");
 			System.out.println("2. 운동한 기록을 조회합니다.");
-			System.out.println("★★★★★★★★★★★★★★★★★★");
+			System.out.println("-----------------------------");
 			System.out.print(">>> ");
 		}			
 

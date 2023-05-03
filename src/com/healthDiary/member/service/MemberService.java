@@ -23,8 +23,8 @@ public class MemberService implements AppService {
 	@Override
 	public void Start() {
 		while(true) {
-			upgradeMember();
 			memberScreen();
+			upgradeMember();
 			int selection = inputInteger();
 			
 			switch (selection) {
@@ -95,8 +95,8 @@ public class MemberService implements AppService {
 		if(members.isEmpty()) {
 			System.out.println("등록된 회원이 없습니다");
 		} else {
+			System.out.println("조회된 회원 결과: " + members.size() + "명");
 			for(int i=0; i<members.size(); i++) {
-				System.out.println("조회된 회원 결과: " + members.size() + "명");
 				System.out.println("회원번호:" + members.get(i).getMemberNum() + " 이름:" +
 						members.get(i).getMemberName() + " 전화번호:" +
 						members.get(i).getPhoneNum() + " 가입일:" +
