@@ -12,17 +12,16 @@ public class AppController {
 	public void chooseSystem(int selectNumber) {
 		switch (selectNumber) {
 		case 1:
-//			service = new ???();
-//			service = new MemberService();
+			service = new MemberService();
 			break;
 		case 2:
-//			service = new ???();
+			
 			break;
 		case 3:
 			service = new RecordStart(); 
 			break;
 		case 4:
-//			service = new ???();
+			
 			break;
 		case 5:
 			System.out.println("\n\n프로그램을 종료합니다.");
