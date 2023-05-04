@@ -50,7 +50,10 @@ public class Exercise {
 	
 	@Override
 	public String toString() {
-		return " "+exe_num + "번 \t" + exe_name + " / 뷴류: " + exe_measure;
+		String mea = "시간"; 
+		if(exe_measure.equals("C")) mea = "횟수";
+		
+		return " "+exe_num + "번 \t" + exe_name + " / 운동 분류: " + exe_measure;
 	}
 	
 
