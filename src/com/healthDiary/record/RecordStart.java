@@ -144,24 +144,22 @@ public class RecordStart implements AppService {
 		
 		RecordAll newRec = null;
         Date date = new Date(15);
-        System.out.println("date: "+date);
 		
 		if(CST.equals("C")) {
 			newRec = new RecordAll(
-					0, user.getMemberNum(), startExeNum, user.getMemberName(), 
+					1, user.getMemberNum(), startExeNum, user.getMemberName(), 
 					selExeName, CST, exeCount, date
 					);			
 		}else {
 			newRec = new RecordAll(
-					0, user.getMemberNum(), startExeNum, user.getMemberName(), 
+					1, user.getMemberNum(), startExeNum, user.getMemberName(), 
 					selExeName, CST, sec, date
 					);			
 		}
-		System.out.println("두근두근 메서드 들어가볼게"+newRec);
 		recordRepository.RecAdd(newRec);
 
-		System.out.println(" --★--> Enter <--★-- ");
-		inputString();
+		System.out.println("----------PRESS ENTER KEY----------");
+        inputString();
 
 	}
 	
@@ -183,8 +181,8 @@ public class RecordStart implements AppService {
 				System.out.println(re);
 			}
 			System.out.println("────────────────────────────────────────\n");	
-			System.out.println(" --★--> Enter <--★-- ");
-			inputString();
+			System.out.println("----------PRESS ENTER KEY----------");
+            inputString();
 		} else {
 			System.out.println("조회된 운동 기록이 없습니다! 운동 좀 하세요!");
 			System.out.println("▷ Y 입력으로 바로 운동하러 가기");
@@ -192,9 +190,9 @@ public class RecordStart implements AppService {
 			String answer = inputString().toUpperCase();
 			if(answer.equals("Y")) exeStart();
 			else {
-				System.out.println("운동 안하시나요? 아쉽습니다.....\n");
-				System.out.println(" --★--> Enter <--★-- ");
-				inputString();
+				System.out.println("운동 안하시나요? 근손실 오는데.....\n");
+				System.out.println("----------PRESS ENTER KEY----------");
+	            inputString();
 			}
 			return;
 		}
@@ -214,22 +212,22 @@ public class RecordStart implements AppService {
 		List<Member> memList= recordRepository.memListSearch(sql);
 		
 		if(memList.size()!=0) {
-			System.out.println("\n─────────────── 검색 목록 ───────────────");
+			System.out.println("\n────────────────── 검색 목록 ──────────────────");
 			System.out.println(" 번호 \t이름    전화 뒷자리   등급      가입일");
 			for(Member m : memList) {
 				if(m.getMemberName().equals(anName)) {
 					System.out.println(m);
 				}
 			}
-			System.out.println("──────────────────────────────────────");			
+			System.out.println("────────────────────────────────────────────");			
 		} else {
 			System.out.println("\n '"+anName+"' 회원이 존재하지 않습니다. 검색어를 다시 한 번 확인해주세요.\n");
-			System.out.println(" --★--> Enter <--★-- ");
-			inputString();
+			System.out.println("----------PRESS ENTER KEY----------");
+            inputString();
 			return null;
 		}
 		
-		System.out.print("★★★ 본인의 회원 번호를 골라주세요. ★★★ \n > ");
+		System.out.print("★★★ 회원 번호를 골라주세요. ★★★ \n > ");
 		int selMyNum = inputInteger();
 		boolean flag = false;
 		

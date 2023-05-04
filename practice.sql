@@ -95,4 +95,23 @@ INSERT INTO record VALUES (record_seq.NEXTVAL, 25, 2, 130, '23/04/30');
 INSERT INTO record VALUES (record_seq.NEXTVAL, 25, 1, 5, '23/04/25');
 INSERT INTO record VALUES (record_seq.NEXTVAL, 25, 1, 12, '23/01/16');
 
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL,'푸시업', 'C');
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL,'벤치 프레스', 'C');
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL,'밀리터리 프레스','C');
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL, '자전거', 'S');
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL,'데드리프트','C');
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL, '천국의 계단','S');
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL,'해머 컬','C');
+INSERT INTO exercise VALUES (exercise_seq.NEXTVAL,'윗몸 일으키기','C'); 
+
 COMMIT;
+
+
+--초기화
+--DROP TABLE record;
+--DROP TABLE member;
+--DROP TABLE exercise;
+--DROP SEQUENCE member_seq;
+--DROP SEQUENCE exercise_seq;
+--DROP SEQUENCE record_seq;
+

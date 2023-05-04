@@ -51,8 +51,7 @@ public class HealthManage implements AppService {
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             int count = 0;
-            System.out.println("\n★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-            System.out.println("\n운동 목록 보여드릴게요.");
+            System.out.println("\n\n운동 목록 보여드릴게요.");
             System.out.println();
             while (rs.next()) {
                 int exeNum = rs.getInt("exe_num");
@@ -60,39 +59,12 @@ public class HealthManage implements AppService {
                 System.out.println(exeNum + "번 운동: " + exeName);
                 count++;
             }
-            System.out.printf("--------- 총 %d건 ---------\n", count);
+            System.out.printf("★★★★★★★★ 총 %d건 ★★★★★★★★\n", count);
             System.out.println("\n\n----------PRESS ENTER KEY----------");
             inputString();
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
-//        System.out.println("\n이중에 하고싶은 운동 있으시면 번호로 알려주세요! 없다면 0을 입력해주세요.");
-//        System.out.print("=> ");
-//        int workOut = inputInteger();
-//
-//        if(workOut == 0) {
-//            System.out.println("\n\n----------PRESS ENTER KEY----------");
-//            inputString();
-//            return;
-//        }
-//
-//        try (Connection conn = connection.getConnection();
-//                PreparedStatement pstmt = conn.prepareStatement(
-//                        "SELECT * FROM exercise WHERE exe_name = ?")) {
-//            pstmt.setInt(1, workOut);
-//            ResultSet rs = pstmt.executeQuery();
-//            if(rs.next()) {
-//                System.out.println("운동 시작!");
-//                recordStart.exeStart();
-//                return;
-//            } else {
-//                System.out.println("존재하지 않는 운동이에요.");
-//                return;
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
 
     }
 
@@ -110,19 +82,18 @@ public class HealthManage implements AppService {
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			ResultSet rs = pstmt.executeQuery();
 			int count = 0;
-			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-			System.out.println("\n어떤 운동을 그만하고싶으세요?");
+			System.out.println("\n\n어떤 운동을 그만하고싶으세요?");
 			System.out.println();
 			while (rs.next()) {
 				String exeName = rs.getString("exe_name");
-				System.out.println(exeName);
+				System.out.println("★ "+exeName);
 				count++;
 			}    
 			System.out.printf("총 %d건", count);
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.print(">>> ");
+		System.out.print("\n★ 삭제할 운동명: ");
 		String select = inputString();
 
 		sql = "DELETE FROM exercise WHERE exe_name = ?";
@@ -135,6 +106,8 @@ public class HealthManage implements AppService {
 			} else {
 				System.out.println("그런 운동은 없어요 회원님!");
 			}
+			System.out.println("\n\n----------PRESS ENTER KEY----------");
+            inputString();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -156,13 +129,23 @@ public class HealthManage implements AppService {
 				System.out.println("네 무엇인가요?");
 				System.out.print(">>> ");
 				String answer = inputString();
-				System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★3");
+				System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★");
 				if(answer.equals("")) {
 					System.out.println("아무 값이 입력되지 않았어요. 다시 입력해주세요.");
 					return;
 				}
 				System.out.println(answer + " 이(가) 추가되었습니다.");
+				System.out.println(answer + "이 시간을 재는 운동이면 'S'를, "
+						+ "횟수를 재는 운동이면 'C'를 입력해주세요.");
+				System.out.print(">>> ");
+				String answer2 = inputString();
+				if(!answer2.equals("C") || answer2.equals("S") || answer2.equals("T")) {
+					System.out.println("잘못된 입력값이에요.");
+					break;
+				}
 				exercise.setName(answer);
+				exercise.setExe_measure(answer2);
+				
 				exerciseRepository.addExercise(exercise);
 				break;
 

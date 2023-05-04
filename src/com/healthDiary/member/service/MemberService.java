@@ -125,8 +125,8 @@ public class MemberService implements AppService {
 			int delMemberNum = inputInteger();
 			memberRepository.deleteMember(delMemberNum);
 		}
-		System.out.println("\n --★--> Enter <--★-- ");
-		inputString();
+		System.out.println("\n----------PRESS ENTER KEY----------");
+        inputString();
 		
 	}
 	
@@ -146,8 +146,8 @@ public class MemberService implements AppService {
 					, allMember.get(i).getGrade());
 		}
 		System.out.println("─────────────────────────────────────────────────────────\n");
-		System.out.println(" --★--> Enter <--★-- ");
-		inputString();
+		System.out.println("----------PRESS ENTER KEY----------");
+        inputString();
 	}
 	
 	
@@ -156,9 +156,7 @@ public class MemberService implements AppService {
 	//업그레이드
 	private void upgradeMember() {
 		List<Member> upMember = memberRepository.searchMemberList();
-//		List<Member> update = memberRepository.updateMember(null, null);
 
-		
 		Date memberRegDate;
 		LocalDateTime memberDateTime;
 		long between;
@@ -170,34 +168,20 @@ public class MemberService implements AppService {
 	                .toLocalDateTime();
 	        
 	        between = ChronoUnit.YEARS.between(memberDateTime , LocalDateTime.now());
-//			System.out.println("비트윈"+between);
-//			System.out.println("멤버데이트타임"+memberDateTime);
-//	        memberDateTime = LocalDateTime.now();
-//	        Date date = Date.from(memberDateTime.atZone(ZoneId.systemDefault()).toInstant());
 	        
-	        if(between > 1) {
-	        	String silver =  "SILVER";
-	    		memberRepository.updateMember(silver, upMember.get(i).getMemberNum());
-	    		
-//	    		System.out.println("if 들어옴"+upMember.get(i).getMemberNum());
-//	        	upMember.get(i).setGrade("silver");
-//	    		upMember.get(i).getMemberNum();
-	        }
-	        
-	        if(between > 2) {
-	        	String gold = "GOLD";
-	        	memberRepository.updateMember(gold, upMember.get(i).getMemberNum());
-	        }
-	        
-	        if(between > 3) {
-	        	String platinum = "PLATINUM";
-	        	memberRepository.updateMember(platinum, upMember.get(i).getMemberNum());
-	        }
-	        
-	        if(between > 4) {
-	        	String diamond = "DIAMOND";
-	        	memberRepository.updateMember(diamond, upMember.get(i).getMemberNum());
-	        }
+
+            if(between > 4) {
+                String diamond = "DIAMOND";
+                memberRepository.updateMember(diamond, upMember.get(i).getMemberNum());
+            } else if(between > 3) {
+                String platinum = "PLATINUM";
+                memberRepository.updateMember(platinum, upMember.get(i).getMemberNum());
+            } else if(between > 2) {
+                String gold = "GOLD";
+                memberRepository.updateMember(gold, upMember.get(i).getMemberNum());
+            } else if(between > 1) {
+                String silver =  "SILVER";
+                memberRepository.updateMember(silver, upMember.get(i).getMemberNum());
 	        
 		}
 		
@@ -206,14 +190,7 @@ public class MemberService implements AppService {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	}
 }
 
 
